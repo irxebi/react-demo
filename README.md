@@ -22,5 +22,5 @@ CI=true npm test -- --watchAll=false # for single non-watch test run
 ```
 
 ```bash
-npm run build # prod built
+npm run build # prod build
 ```
