@@ -227,7 +227,7 @@ export default function MainPage() {
                   Page {currentPage} of {totalPages}
                 </span>
                 <button
-                  className="btn btn-brand"
+                  className="btn btn-outline-dark"
                   type="button"
                   onClick={() => setCurrentPage((page) => page + 1)}
                   disabled={currentPage === totalPages}

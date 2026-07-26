@@ -111,6 +111,16 @@ a {
     0 3px 0 var(--navy);
 }
 
+.hero-title,
+.auth-title {
+  text-shadow:
+    4px 4px 0 var(--navy),
+    -3px -3px 0 var(--navy),
+    3px -3px 0 var(--navy),
+    -3px 3px 0 var(--navy),
+    0 5px 0 var(--navy);
+}
+
 .navbar-brand {
   color: var(--accent) !important;
   text-shadow:
@@ -286,7 +296,7 @@ a {
 }
 
 .card-link {
-  color: var(--brand);
+  color: #98a2b3;
   font-weight: 900;
 }
 
@@ -299,6 +309,29 @@ a {
 
 .pagination-panel span {
   font-weight: 900;
+}
+
+.pagination-panel .btn {
+  color: #667085;
+  background: #f2f4f7;
+  border-color: #d0d5dd;
+}
+
+.pagination-panel .btn:hover {
+  color: #344054;
+  background: #e4e7ec;
+  border-color: #98a2b3;
+}
+
+.pagination-panel .btn:focus,
+.pagination-panel .btn:active,
+.pagination-panel .btn:focus-visible,
+.pagination-panel .btn:first-child:active,
+.pagination-panel .btn-outline-dark:active {
+  color: #667085;
+  background: #f2f4f7;
+  border-color: #d0d5dd;
+  box-shadow: none;
 }
 
 .pokemon-profile {
