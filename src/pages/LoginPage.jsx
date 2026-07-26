@@ -13,34 +13,14 @@ export default function LoginPage() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const digitsOnly = phoneNumber.replace(/\D/g, '');
-    const dialCode = countryData?.dialCode || '';
-    const nationalNumber = digitsOnly.startsWith(dialCode)
-      ? digitsOnly.slice(dialCode.length)
-      : digitsOnly;
-    const expectedDigitCount = getExpectedDigitCount(countryData);
+    const validation = validatePhoneNumber(phoneNumber, countryData);
 
-    if (!digitsOnly) {
-      setError('Phone number is required.');
+    if (!validation.isValid) {
+      setError(validation.message);
       return;
     }
 
-    if (!dialCode || !nationalNumber) {
-      setError('Enter a valid phone number.');
-      return;
-    }
-
-    if (expectedDigitCount && digitsOnly.length !== expectedDigitCount) {
-      setError('Enter a valid phone number.');
-      return;
-    }
-
-    if (/^(\d)\1+$/.test(nationalNumber)) {
-      setError('Enter a valid phone number.');
-      return;
-    }
-
-    login(`+${digitsOnly}`);
+    login(validation.formattedPhoneNumber);
 
     setError('');
     navigate('/pokemon');
@@ -95,6 +75,36 @@ export default function LoginPage() {
       </section>
     </main>
   );
+}
+
+function validatePhoneNumber(phoneNumber, countryData) {
+  const digitsOnly = phoneNumber.replace(/\D/g, '');
+  const dialCode = countryData?.dialCode || '';
+  const nationalNumber = digitsOnly.startsWith(dialCode)
+    ? digitsOnly.slice(dialCode.length)
+    : digitsOnly;
+  const expectedDigitCount = getExpectedDigitCount(countryData);
+
+  if (!digitsOnly) {
+    return { isValid: false, message: 'Phone number is required.' };
+  }
+
+  if (!dialCode || !nationalNumber) {
+    return { isValid: false, message: 'Enter a valid phone number.' };
+  }
+
+  if (expectedDigitCount && digitsOnly.length !== expectedDigitCount) {
+    return { isValid: false, message: 'Enter a valid phone number.' };
+  }
+
+  if (/^(\d)\1+$/.test(nationalNumber)) {
+    return { isValid: false, message: 'Enter a valid phone number.' };
+  }
+
+  return {
+    isValid: true,
+    formattedPhoneNumber: `+${digitsOnly}`
+  };
 }
 
 function getExpectedDigitCount(countryData) {

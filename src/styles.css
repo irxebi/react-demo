@@ -7,8 +7,21 @@
   --surface: #ffffff;
   --page: #eef3f8;
   --navy: #3b4cca;
-  --gold-shadow: #b3a125;
   --image-gradient: linear-gradient(135deg, rgba(59, 76, 202, 0.9), rgba(204, 0, 0, 0.68), rgba(255, 222, 0, 0.45));
+  --border-soft: 1px solid rgba(23, 32, 42, 0.1);
+  --radius-lg: 18px;
+  --title-shadow-heavy:
+    4px 4px 0 var(--navy),
+    -3px -3px 0 var(--navy),
+    3px -3px 0 var(--navy),
+    -3px 3px 0 var(--navy),
+    0 5px 0 var(--navy);
+  --title-shadow-light:
+    2px 2px 0 var(--navy),
+    -1px -1px 0 var(--navy),
+    1px -1px 0 var(--navy),
+    -1px 1px 0 var(--navy),
+    0 3px 0 var(--navy);
 }
 
 @font-face {
@@ -67,7 +80,7 @@ a {
   padding: 36px;
   background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.72);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
 }
 
 .eyebrow {
@@ -103,32 +116,12 @@ a {
 .hero-title,
 .auth-title {
   color: var(--accent) !important;
-  text-shadow:
-    2px 2px 0 var(--navy),
-    -1px -1px 0 var(--navy),
-    1px -1px 0 var(--navy),
-    -1px 1px 0 var(--navy),
-    0 3px 0 var(--navy);
-}
-
-.hero-title,
-.auth-title {
-  text-shadow:
-    4px 4px 0 var(--navy),
-    -3px -3px 0 var(--navy),
-    3px -3px 0 var(--navy),
-    -3px 3px 0 var(--navy),
-    0 5px 0 var(--navy);
+  text-shadow: var(--title-shadow-heavy);
 }
 
 .navbar-brand {
   color: var(--accent) !important;
-  text-shadow:
-    2px 2px 0 var(--navy),
-    -1px -1px 0 var(--navy),
-    1px -1px 0 var(--navy),
-    -1px 1px 0 var(--navy),
-    0 3px 0 var(--navy);
+  text-shadow: var(--title-shadow-light);
 }
 
 .phone-container .form-control {
@@ -165,20 +158,13 @@ a {
   font-weight: 950;
 }
 
-.hero-copy {
-  max-width: 620px;
-  margin: 18px 0 0;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 1.08rem;
-}
-
 .featured-panel,
 .filter-panel,
 .pokemon-profile,
 .loading-card {
   background: var(--surface);
-  border: 1px solid rgba(23, 32, 42, 0.1);
-  border-radius: 18px;
+  border: var(--border-soft);
+  border-radius: var(--radius-lg);
 }
 
 .featured-panel {
@@ -235,8 +221,8 @@ a {
   color: var(--ink);
   background:
     linear-gradient(180deg, #ffffff, #f8fbff);
-  border: 1px solid rgba(23, 32, 42, 0.1);
-  border-radius: 18px;
+  border: var(--border-soft);
+  border-radius: var(--radius-lg);
   transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 }
 
@@ -429,7 +415,7 @@ a {
   padding: 6px 12px;
   color: var(--ink);
   background: #ffffff;
-  border: 1px solid rgba(23, 32, 42, 0.1);
+  border: var(--border-soft);
   border-radius: 999px;
   font-weight: 800;
 }

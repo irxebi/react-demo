@@ -172,39 +172,9 @@ export default function MainPage() {
             </div>
 
             <section className="row g-4" aria-label="Pokémon list">
-              {visiblePokemon.map((item) => {
-                const typeNames = item.types.map((entry) => entry.type.name);
-
-                return (
-                  <div className="col-sm-6 col-lg-4 col-xl-3" key={item.id}>
-                    <Link className="pokemon-card shadow-sm" to={`/pokemon/${item.name}`}>
-                      <div className="pokemon-card-top">
-                        <span className="dex-number">#{String(item.id).padStart(3, '0')}</span>
-                        <img
-                          src={getSprite(item)}
-                          alt={formatPokemonName(item.name)}
-                          className="pokemon-sprite"
-                        />
-                      </div>
-                      <img
-                        src={getArtwork(item)}
-                        alt=""
-                        className="pokemon-art"
-                        aria-hidden="true"
-                      />
-                      <h3>{formatPokemonName(item.name)}</h3>
-                      <div className="type-row">
-                        {typeNames.map((type) => (
-                          <span className={`type-pill type-${type}`} key={type}>
-                            {formatPokemonName(type)}
-                          </span>
-                        ))}
-                      </div>
-                      <span className="card-link">View profile</span>
-                    </Link>
-                  </div>
-                );
-              })}
+              {visiblePokemon.map((item) => (
+                <PokemonCard pokemon={item} key={item.id} />
+              ))}
 
               {filteredPokemon.length === 0 && (
                 <div className="col-12">
@@ -214,31 +184,76 @@ export default function MainPage() {
             </section>
 
             {filteredPokemon.length > PAGE_SIZE && (
-              <div className="pagination-panel mt-4">
-                <button
-                  className="btn btn-outline-dark"
-                  type="button"
-                  onClick={() => setCurrentPage((page) => page - 1)}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </button>
-                <span>
-                  Page {currentPage} of {totalPages}
-                </span>
-                <button
-                  className="btn btn-outline-dark"
-                  type="button"
-                  onClick={() => setCurrentPage((page) => page + 1)}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </button>
-              </div>
+              <PaginationControls
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPrevious={() => setCurrentPage((page) => page - 1)}
+                onNext={() => setCurrentPage((page) => page + 1)}
+              />
             )}
           </>
         )}
       </section>
     </main>
+  );
+}
+
+function PokemonCard({ pokemon }) {
+  const typeNames = pokemon.types.map((entry) => entry.type.name);
+
+  return (
+    <div className="col-sm-6 col-lg-4 col-xl-3">
+      <Link className="pokemon-card shadow-sm" to={`/pokemon/${pokemon.name}`}>
+        <div className="pokemon-card-top">
+          <span className="dex-number">#{String(pokemon.id).padStart(3, '0')}</span>
+          <img
+            src={getSprite(pokemon)}
+            alt={formatPokemonName(pokemon.name)}
+            className="pokemon-sprite"
+          />
+        </div>
+        <img
+          src={getArtwork(pokemon)}
+          alt=""
+          className="pokemon-art"
+          aria-hidden="true"
+        />
+        <h3>{formatPokemonName(pokemon.name)}</h3>
+        <div className="type-row">
+          {typeNames.map((type) => (
+            <span className={`type-pill type-${type}`} key={type}>
+              {formatPokemonName(type)}
+            </span>
+          ))}
+        </div>
+        <span className="card-link">View profile</span>
+      </Link>
+    </div>
+  );
+}
+
+function PaginationControls({ currentPage, totalPages, onPrevious, onNext }) {
+  return (
+    <div className="pagination-panel mt-4">
+      <button
+        className="btn btn-outline-dark"
+        type="button"
+        onClick={onPrevious}
+        disabled={currentPage === 1}
+      >
+        Previous
+      </button>
+      <span>
+        Page {currentPage} of {totalPages}
+      </span>
+      <button
+        className="btn btn-outline-dark"
+        type="button"
+        onClick={onNext}
+        disabled={currentPage === totalPages}
+      >
+        Next
+      </button>
+    </div>
   );
 }
