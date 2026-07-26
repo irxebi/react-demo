@@ -10,9 +10,11 @@ Clone the repository and enter the following commands.
 
    ```bash
    cd react-demo
-
+   ```
+   ```bash
    npm install # install dependencies
-
+   ```
+   ```bash
    npm start # start dev server
    ```
 
@@ -20,7 +22,8 @@ Clone the repository and enter the following commands.
 
 ```bash
 npm test
-
+```
+```bash
 CI=true npm test -- --watchAll=false # for single non-watch test run
 ```
 
