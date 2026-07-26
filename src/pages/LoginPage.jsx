@@ -18,13 +18,19 @@ export default function LoginPage() {
     const nationalNumber = digitsOnly.startsWith(dialCode)
       ? digitsOnly.slice(dialCode.length)
       : digitsOnly;
+    const expectedDigitCount = getExpectedDigitCount(countryData);
 
     if (!digitsOnly) {
       setError('Phone number is required.');
       return;
     }
 
-    if (!dialCode || nationalNumber.length < 7 || nationalNumber.length > 12) {
+    if (!dialCode || !nationalNumber) {
+      setError('Enter a valid phone number.');
+      return;
+    }
+
+    if (expectedDigitCount && digitsOnly.length !== expectedDigitCount) {
       setError('Enter a valid phone number.');
       return;
     }
@@ -89,4 +95,12 @@ export default function LoginPage() {
       </section>
     </main>
   );
+}
+
+function getExpectedDigitCount(countryData) {
+  if (!countryData?.format) {
+    return null;
+  }
+
+  return countryData.format.split('').filter((character) => character === '.').length;
 }
