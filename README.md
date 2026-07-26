@@ -9,9 +9,6 @@ Pokémon directory using PokeAPI:
 Clone the repository and enter the following commands.
 
    ```bash
-   cd react-demo
-   ```
-   ```bash
    npm install # install dependencies
    ```
    ```bash
