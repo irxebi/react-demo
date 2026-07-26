@@ -2,7 +2,7 @@
 
 Pokémon directory using PokeAPI:
 
-`https://pokeapi.co/api/v2`
+`https://pokeapi.co/api/v2/pokemon?limit=151`
 
 ## Project Setup
 
